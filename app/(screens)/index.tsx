@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, Platform, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker'
 import DropwDownPicker from 'react-native-dropdown-picker'
+import RectBoard from '@/components/RectBoard';
 
 const { height, width } = Dimensions.get('window')
 

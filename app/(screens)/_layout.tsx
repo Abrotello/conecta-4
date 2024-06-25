@@ -13,6 +13,7 @@ export default function HomeLayout() {
           fontWeight: 'bold',
           fontSize: 20,
         },
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen 
         name="index" 
