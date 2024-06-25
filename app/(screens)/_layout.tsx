@@ -23,7 +23,10 @@ export default function HomeLayout() {
       <Stack.Screen 
         name="Board" 
         options={{
-          headerTitle: 'BoardGame'
+          headerTitle: 'BoardGame',
+          headerStyle: {
+            backgroundColor: appColors.secondary,
+          }
         }}/>
     </Stack>
   );

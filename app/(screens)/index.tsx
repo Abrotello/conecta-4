@@ -41,8 +41,12 @@ export default function HomeScreen() {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-            <View style={{ alignItems: 'flex-end', right: 15, }}><Link href={'/Board'} style={styles.buttonText}>Play</Link></View>
+            <View style={{ alignItems: 'flex-end', right: 15, }}>
+              {
+                <Link href={'/Board'} style={styles.buttonText} onPress={() => {setText(''), setDifficult('easy')}}>Play</Link>
+              }
           </View>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
