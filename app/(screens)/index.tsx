@@ -1,52 +1,33 @@
 import { appColors } from '@/Theme/appTheme';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, Platform, Modal } from 'react-native';
-import { Picker } from '@react-native-picker/picker'
-import DropwDownPicker from 'react-native-dropdown-picker'
-import RectBoard from '@/components/RectBoard';
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
 
 const { height, width } = Dimensions.get('window')
 
 export default function HomeScreen() {
 
-  const [ text, setText ] = useState<string>('');
-  const [ difficult, setDifficult ] = useState('easy');
-  const [ open, setOpen ] = useState(false);
-  const [ items, setItems ] = useState([
-    { label: 'Easy', value: 'easy' },
-    { label: 'Medium', value: 'medium' },
-    { label: 'Hard', value: 'hard' }
-  ]);
+  const [ user1, setUser1 ] = useState<string>('');
+  const [ user2, setUser2 ] = useState<string>('');
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.logContainer}>
           <View style={styles.infoContainer}>
-            <View style={styles.userContainer}>
-              <Text style={styles.title}>Username</Text>
-              <TextInput value={text} onChangeText={setText} style={styles.inputText} textAlign='center'/>
+            <View style={styles.user1Container}>
+              <Text style={styles.title}>Username 1</Text>
+              <TextInput value={user1} onChangeText={setUser1} style={styles.inputText} textAlign='center'/>
             </View>
-            <View style={styles.difficultContainer}>
-              <Text style={styles.title}>Difficulty</Text>
-              <DropwDownPicker 
-                open={open}
-                value={difficult}
-                items={items}
-                setOpen={setOpen}
-                setValue={setDifficult}
-                setItems={setItems}
-                textStyle={styles.pickerText}
-              />  
+            <View style={styles.user2Container}>
+              <Text style={styles.title}>Username 2</Text>
+              <TextInput value={user2} onChangeText={setUser2} style={styles.inputText} textAlign='center'/>
             </View>
           </View>
         </View>
         <View style={styles.buttonContainer}>
-            <View style={{ alignItems: 'flex-end', right: 15, }}>
-              {
-                <Link href={'/Board'} style={styles.buttonText} onPress={() => {setText(''), setDifficult('easy')}}>Play</Link>
-              }
-          </View>
+          <TouchableOpacity style={styles.buttonText} onPress={()=> router.navigate('Board')}>
+            <Text style={[styles.title, {alignSelf: 'center'}]}>Play</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -72,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
-  userContainer: {
+  user1Container: {
     alignItems: 'stretch',
     justifyContent: 'center',
     gap: 10,
@@ -93,26 +74,21 @@ const styles = StyleSheet.create({
     width: 'auto',
     height: 40,
   },
-  difficultContainer: {
+  user2Container: {
     alignItems: 'stretch',
     justifyContent: 'center',
     gap: 10,
     width: width-130,
-  },
-  pickerText: {
-    fontSize: 25,
-    color: '#000',
-    textAlign: 'left',
   },
   buttonContainer: {
     flex: 0,
     width: width-50,
   },
   buttonText: {
-    padding: 5,
-    fontSize: 30,
-    fontWeight: 'bold',
-    letterSpacing: 4,
-    color: '#FFF'
+    alignSelf: 'center',
+    padding: 10,
+    backgroundColor: appColors.main,
+    width: '90%',
+    borderRadius: 50,
   }
 });
