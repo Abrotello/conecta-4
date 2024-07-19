@@ -1,61 +1,91 @@
+import CustomAlert from '@/components/CustomAlert';
 import { appColors } from '@/Theme/appTheme';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Dimensions, 
+  TextInput, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  TouchableOpacity, 
+  KeyboardAvoidingView, 
+  Platform 
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const { height, width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 export default function HomeScreen() {
 
   const [ user1, setUser1 ] = useState<string>('');
   const [ user2, setUser2 ] = useState<string>('');
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [alertMessage, setAlertMessage] = useState<string>('')
 
   const regex: RegExp = /[A-Za-z]{4}/;
 
   const checkUsers = () => {
-    if(user1 === '' && user2 == '') return
-    if(!regex.test(user1) && !regex.test(user2)) return
-    if(user1.toLowerCase() === user2.toLowerCase()) return
+    if(user1 === '' && user2 == '') {
+      setAlertMessage('Both fields are empty!');
+      setModalVisible(true);
+      return
+    }
+    if(!regex.test(user1) && !regex.test(user2)) {
+      setAlertMessage('Both users are invalid!');
+      setModalVisible(true);
+      return
+    }
+    if(user1.toLowerCase() === user2.toLowerCase()) {
+      setAlertMessage('Users are the same.');
+      setModalVisible(true);
+      return
+    }
     router.replace('Board')
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS=== 'ios' ? 'padding': 'height'}>
-        <View style={styles.logContainer}>
-          <View style={styles.infoContainer}>
-            <View style={styles.user1Container}>
-              <Text style={styles.title}>Username 1</Text>
-              <TextInput 
-                placeholder='User 1'
-                placeholderTextColor={'#888'}
-                value={user1}
-                onChangeText={setUser1}
-                style={styles.inputText} 
-                textAlign='center'
-              />
-            </View>
-            <View style={styles.user1Container}>
-              <Text style={styles.title}>Username 2</Text>
-              <TextInput 
-                placeholder='User 2'
-                placeholderTextColor={'#888'}
-                value={user2} 
-                onChangeText={setUser2} 
-                style={styles.inputText} 
-                textAlign='center'/>
+    <SafeAreaView style={{flex:1, backgroundColor: appColors.secondary}}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS=== 'ios' ? 'padding': 'height'}>
+          <View style={styles.logContainer}>
+            <View style={styles.infoContainer}>
+              <View style={styles.user1Container}>
+                <Text style={styles.title}>Username 1</Text>
+                <TextInput 
+                  placeholder='User 1'
+                  placeholderTextColor={'#888'}
+                  value={user1}
+                  onChangeText={setUser1}
+                  style={styles.inputText} 
+                  textAlign='center'
+                />
+              </View>
+              <View style={styles.user1Container}>
+                <Text style={styles.title}>Username 2</Text>
+                <TextInput 
+                  placeholder='User 2'
+                  placeholderTextColor={'#888'}
+                  value={user2} 
+                  onChangeText={setUser2} 
+                  style={styles.inputText} 
+                  textAlign='center'/>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity 
-            style={styles.buttonText} 
-            onPress={checkUsers}>
-            <Text style={[styles.title, {alignSelf: 'center'}]}>Play</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+              style={styles.buttonText} 
+              onPress={checkUsers}>
+              <Text style={[styles.title, {alignSelf: 'center'}]}>Play</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+         <CustomAlert message='Message' visible={true}/>
+    </SafeAreaView>
   );
 }
 
@@ -70,7 +100,7 @@ const styles = StyleSheet.create({
   logContainer: {
     height: height*0.4,
     width: '90%',
-    borderRadius: 50,
+    borderRadius: 30,
     backgroundColor: appColors.main
   },
   infoContainer: {
