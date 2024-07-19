@@ -1,7 +1,7 @@
 import { appColors } from '@/Theme/appTheme';
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 
 const { height, width } = Dimensions.get('window')
 
@@ -9,27 +9,52 @@ export default function HomeScreen() {
 
   const [ user1, setUser1 ] = useState<string>('');
   const [ user2, setUser2 ] = useState<string>('');
+
+  const regex: RegExp = /[A-Za-z]{4}/;
+
+  const checkUsers = () => {
+    if(user1 === '' && user2 == '') return
+    if(!regex.test(user1) && !regex.test(user2)) return
+    if(user1.toLowerCase() === user2.toLowerCase()) return
+    router.replace('Board')
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS=== 'ios' ? 'padding': 'height'}>
         <View style={styles.logContainer}>
           <View style={styles.infoContainer}>
             <View style={styles.user1Container}>
               <Text style={styles.title}>Username 1</Text>
-              <TextInput value={user1} onChangeText={setUser1} style={styles.inputText} textAlign='center'/>
+              <TextInput 
+                placeholder='User 1'
+                placeholderTextColor={'#888'}
+                value={user1}
+                onChangeText={setUser1}
+                style={styles.inputText} 
+                textAlign='center'
+              />
             </View>
-            <View style={styles.user2Container}>
+            <View style={styles.user1Container}>
               <Text style={styles.title}>Username 2</Text>
-              <TextInput value={user2} onChangeText={setUser2} style={styles.inputText} textAlign='center'/>
+              <TextInput 
+                placeholder='User 2'
+                placeholderTextColor={'#888'}
+                value={user2} 
+                onChangeText={setUser2} 
+                style={styles.inputText} 
+                textAlign='center'/>
             </View>
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.buttonText} onPress={()=> router.navigate('Board')}>
+          <TouchableOpacity 
+            style={styles.buttonText} 
+            onPress={checkUsers}>
             <Text style={[styles.title, {alignSelf: 'center'}]}>Play</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }
@@ -43,21 +68,21 @@ const styles = StyleSheet.create({
     gap: 50,
   },
   logContainer: {
-    height: height-450,
-    width: width-50,
+    height: height*0.4,
+    width: '90%',
     borderRadius: 50,
     backgroundColor: appColors.main
   },
   infoContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-evenly'
   },
   user1Container: {
     alignItems: 'stretch',
     justifyContent: 'center',
     gap: 10,
-    width: width-130,
+    width: '80%',
   },
   title: {
     color: '#FFF',
@@ -74,21 +99,14 @@ const styles = StyleSheet.create({
     width: 'auto',
     height: 40,
   },
-  user2Container: {
-    alignItems: 'stretch',
-    justifyContent: 'center',
-    gap: 10,
-    width: width-130,
-  },
   buttonContainer: {
-    flex: 0,
-    width: width-50,
+    width: '95%',
   },
   buttonText: {
     alignSelf: 'center',
     padding: 10,
     backgroundColor: appColors.main,
     width: '90%',
-    borderRadius: 50,
+    borderRadius: 20,
   }
 });

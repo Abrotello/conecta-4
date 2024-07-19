@@ -1,5 +1,10 @@
 import { appColors } from "@/Theme/appTheme";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { 
+  Dimensions, 
+  StyleSheet, 
+  View, 
+  TouchableOpacity 
+} from "react-native";
 const { width } = Dimensions.get('window')
 
 const rows = 6
@@ -12,7 +17,7 @@ export default function RectBoard() {
         <View key={rowIndex} style={styles.row}>
           {Array.from({ length: cols }).map((_, colIndex) => (
             <View key={colIndex} style={styles.cell}>
-              <View style={styles.circle} />
+              <TouchableOpacity style={styles.circle} />
             </View>
           ))}
         </View>
@@ -29,21 +34,22 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     overflow: 'hidden',
     backgroundColor: appColors.main,
+    gap: 1,
   },
   row: {
     flexDirection: 'row',
   },
   cell: {
     width: width / cols,
-    height: width / rows,
+    height: (width / rows) + 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.secondary,
   },
   circle: {
-    width: (width / cols - 10) * 0.9,
-    height: (width / cols - 10) * 0.9,
+    width: (width / cols - 5),
+    height: (width / cols - 5),
     backgroundColor: appColors.main,
-    borderRadius: (width / cols - 10) * 0.5,
+    borderRadius: (width / cols) * 0.5,
   },
 });

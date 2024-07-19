@@ -1,15 +1,22 @@
 import { appColors } from '@/Theme/appTheme';
 import RectBoard from '@/components/RectBoard';
-import { View, Text, StyleSheet } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet 
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ROWS: number = 6, COLS: number = 7;
 
+interface BoardProps {
+
+}
 
 export default function BoardScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <RectBoard/>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -17,11 +24,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: appColors.main
+    justifyContent: 'flex-end',
+    backgroundColor: appColors.main,
   },
-  gameContainer: {
-
-    backgroundColor: appColors.player2
-  }
 });
