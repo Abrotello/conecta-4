@@ -12,20 +12,18 @@ import {
 interface AlertProps {
     visible: boolean,
     message: string,
-    onClose?: ()=> void,
+    onClose: ()=> void,
 }
 
 const { width } = Dimensions.get('window')
 
 export default function Alert({ message, visible, onClose }: AlertProps) {
 
-    const [modalVisible, setModalVisible] = useState<boolean>(false)
-
     return (
         <Modal
             transparent={true}
             visible={visible}
-            animationType='slide'
+            animationType='none'
             onRequestClose={onClose}
         >
             <View style={styles.modalBackground}>
@@ -55,7 +53,7 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         width: width*0.75,
-        height: width*0.36,
+        height: width*0.4,
         backgroundColor: '#F5F5F5',
         borderRadius: 10,
         alignItems: 'center',
@@ -82,7 +80,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     modalMessage: {
-        fontSize: 16,
+        fontSize: 17,
+        fontWeight: 'bold'
     },
     modalButton: {
         alignItems: 'center',

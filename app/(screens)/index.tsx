@@ -35,7 +35,15 @@ export default function HomeScreen() {
     }
     if(!regex.test(user1) && !regex.test(user2)) {
       setAlertMessage('Both users are invalid!');
-      setModalVisible(true);
+      setModalVisible(true)
+      return
+    } else if(!regex.test(user1) && regex.test(user2)) {
+      setAlertMessage('User 1 invalid name!')
+      setModalVisible(true)
+      return
+    } else if(regex.test(user1) && !regex.test(user2)) {
+      setAlertMessage('User 2 invalid name!')
+      setModalVisible(true)
       return
     }
     if(user1.toLowerCase() === user2.toLowerCase()) {
@@ -84,7 +92,7 @@ export default function HomeScreen() {
           </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
-         <CustomAlert message='Message' visible={true}/>
+         <CustomAlert message={alertMessage} visible={modalVisible} onClose={() => setModalVisible(false)}/>
     </SafeAreaView>
   );
 }
