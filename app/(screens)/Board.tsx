@@ -5,26 +5,29 @@ import {
   Text, 
   StyleSheet 
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-
-interface BoardProps {
-
-}
 
 export default function BoardScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <RectBoard/>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <View style={styles.logContainer}>
+        
+      </View>
+      <View style={styles.boardContainer}>
+        <RectBoard />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: appColors.main,
   },
+  logContainer: {
+    flex: 1,
+  },
+  boardContainer: {
+    flex: 1,
+  }
 });

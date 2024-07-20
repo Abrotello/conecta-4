@@ -34,20 +34,20 @@ export default function HomeScreen() {
       return
     }
     if(!regex.test(user1) && !regex.test(user2)) {
-      setAlertMessage('Both users are invalid!');
+      setAlertMessage('Both players are invalid!');
       setModalVisible(true)
       return
     } else if(!regex.test(user1) && regex.test(user2)) {
-      setAlertMessage('User 1 invalid name!')
+      setAlertMessage('Player 1 invalid name!')
       setModalVisible(true)
       return
     } else if(regex.test(user1) && !regex.test(user2)) {
-      setAlertMessage('User 2 invalid name!')
+      setAlertMessage('Player 2 invalid name!')
       setModalVisible(true)
       return
     }
     if(user1.toLowerCase() === user2.toLowerCase()) {
-      setAlertMessage('Users are the same.');
+      setAlertMessage('Players are the same!');
       setModalVisible(true);
       return
     }
@@ -61,7 +61,7 @@ export default function HomeScreen() {
           <View style={styles.logContainer}>
             <View style={styles.infoContainer}>
               <View style={styles.user1Container}>
-                <Text style={styles.title}>Username 1</Text>
+                <Text style={styles.title}>Player 1</Text>
                 <TextInput 
                   placeholder='User 1'
                   placeholderTextColor={'#888'}
@@ -72,7 +72,7 @@ export default function HomeScreen() {
                 />
               </View>
               <View style={styles.user1Container}>
-                <Text style={styles.title}>Username 2</Text>
+                <Text style={styles.title}>Player 2</Text>
                 <TextInput 
                   placeholder='User 2'
                   placeholderTextColor={'#888'}

@@ -5,7 +5,7 @@ import {
   View, 
   TouchableOpacity 
 } from "react-native";
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 const rows = 6
 const cols = 7
@@ -28,28 +28,24 @@ export default function RectBoard() {
 
 const styles = StyleSheet.create({
   board: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
+    alignSelf: 'center',
+    borderRadius: 10,
     overflow: 'hidden',
-    backgroundColor: appColors.main,
-    gap: 1,
   },
   row: {
     flexDirection: 'row',
   },
   cell: {
     width: width / cols,
-    height: (width / rows) + 10,
+    height: (width / rows) * 0.85,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.secondary,
   },
   circle: {
-    width: (width / cols - 5),
-    height: (width / cols - 5),
+    width: (width / cols - 10),
+    height: (width / cols - 10),
     backgroundColor: appColors.main,
-    borderRadius: (width / cols) * 0.5,
+    borderRadius: 50,
   },
 });
