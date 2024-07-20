@@ -5,22 +5,28 @@ import {
   View, 
   TouchableOpacity 
 } from "react-native";
+
 const { width, height } = Dimensions.get('window')
 
-const rows = 6
-const cols = 7
+const rows = 6;
+const cols = 7;
 
 export default function RectBoard() {
+
   return (
     <View style={styles.board}>
-      {Array.from({ length: rows }).map((_, rowIndex) => (
-        <View key={rowIndex} style={styles.row}>
-          {Array.from({ length: cols }).map((_, colIndex) => (
-            <View key={colIndex} style={styles.cell}>
-              <TouchableOpacity style={styles.circle} />
+      {Array.from({ length: cols }).map((_, colIndex) => (
+        <TouchableOpacity 
+          key={colIndex}
+          style={styles.column} 
+          activeOpacity={0.6} 
+        >
+          {Array.from({ length: rows }).map((_, rowIndex) => (
+            <View key={rowIndex} style={styles.cell}>
+              <View style={styles.circle} />
             </View>
           ))}
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -28,16 +34,17 @@ export default function RectBoard() {
 
 const styles = StyleSheet.create({
   board: {
+    flexDirection: 'row',
     alignSelf: 'center',
     borderRadius: 10,
     overflow: 'hidden',
   },
-  row: {
-    flexDirection: 'row',
+  column: {
+    flexDirection: 'column',
   },
   cell: {
     width: width / cols,
-    height: (width / rows) * 0.85,
+    height: (width / rows),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.secondary,
@@ -49,3 +56,4 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 });
+

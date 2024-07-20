@@ -25,7 +25,7 @@ export default function HomeScreen() {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [alertMessage, setAlertMessage] = useState<string>('')
 
-  const regex: RegExp = /[A-Za-z]{4}/;
+  const regex: RegExp = /[A-Za-z]{3}/;
 
   const checkUsers = () => {
     if(user1 === '' && user2 == '') {
@@ -63,7 +63,7 @@ export default function HomeScreen() {
               <View style={styles.user1Container}>
                 <Text style={styles.title}>Player 1</Text>
                 <TextInput 
-                  placeholder='User 1'
+                  placeholder='Username'
                   placeholderTextColor={'#888'}
                   value={user1}
                   onChangeText={setUser1}
@@ -74,7 +74,7 @@ export default function HomeScreen() {
               <View style={styles.user1Container}>
                 <Text style={styles.title}>Player 2</Text>
                 <TextInput 
-                  placeholder='User 2'
+                  placeholder='Username'
                   placeholderTextColor={'#888'}
                   value={user2} 
                   onChangeText={setUser2} 
@@ -145,6 +145,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: appColors.main,
     width: '90%',
-    borderRadius: 20,
+    borderRadius: 10,
   }
 });
