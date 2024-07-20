@@ -15,10 +15,13 @@ import {
   Platform 
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { usePlayerStore } from '@/global/playersStore';
 
 const { height } = Dimensions.get('window')
 
 export default function HomeScreen() {
+
+  const { setPlayer1, setPlayer2 } = usePlayerStore()
 
   const [ user1, setUser1 ] = useState<string>('');
   const [ user2, setUser2 ] = useState<string>('');
@@ -51,6 +54,8 @@ export default function HomeScreen() {
       setModalVisible(true);
       return
     }
+    setPlayer1(user1)
+    setPlayer2(user2)
     router.replace('Board')
   }
 
