@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     height: (width / rows),
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: appColors.secondary,
+    backgroundColor: appColors.main,
   },
   circle: {
     width: (width / cols - 10),
     height: (width / cols - 10),
-    backgroundColor: appColors.main,
+    backgroundColor: appColors.secondary,
     borderRadius: 50,
   },
 });

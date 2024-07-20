@@ -25,9 +25,6 @@ export default function HomeLayout() {
         name="Board" 
         options={{
           headerTitle: 'Board Game',
-          headerStyle: {
-            backgroundColor: appColors.secondary,
-          }
         }}/>
     </Stack>
   );

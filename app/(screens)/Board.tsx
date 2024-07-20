@@ -26,7 +26,7 @@ export default function BoardScreen() {
         </View>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity 
-            style={[styles.button, {backgroundColor: appColors.secondary}]}
+            style={[styles.button, {backgroundColor: appColors.main}]}
             onPress={() => {console.log('Restart game')}}
           >
             <Text style={styles.buttonText}>Restart game</Text>
@@ -49,7 +49,7 @@ export default function BoardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: appColors.main,
+    backgroundColor: appColors.secondary,
   },
   logContainer: {
     flex: 1,
