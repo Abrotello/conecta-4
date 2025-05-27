@@ -7,10 +7,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { usePlayerStore } from '@/global/playersStore';
+import { useWinsStore } from '@/global/winsStore';
 
 export default function BoardScreen() {
 
   const { player1, player2 } = usePlayerStore()
+  const { player1Wins, player2Wins } = useWinsStore()
 
   return (
     <View style={styles.container}>
@@ -24,8 +26,8 @@ export default function BoardScreen() {
             <Text style={styles.playersText}>{player2}</Text>
           </View>
           <View style={styles.counterContainer}>
-            <Text style={styles.playersText}>1</Text>
-            <Text style={styles.playersText}>2</Text>
+            <Text style={styles.playersText}>{player1Wins}</Text>
+            <Text style={styles.playersText}>{player2Wins}</Text>
           </View>
         </View>
         <View style={styles.buttonsContainer}>
