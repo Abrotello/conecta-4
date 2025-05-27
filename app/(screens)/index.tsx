@@ -21,7 +21,7 @@ const { height } = Dimensions.get('window')
 
 export default function HomeScreen() {
 
-  const { setPlayer1, setPlayer2 } = usePlayerStore()
+  const { setPlayer1Nickname, setPlayer2Nickname } = usePlayerStore()
 
   const [ user1, setUser1 ] = useState<string>('');
   const [ user2, setUser2 ] = useState<string>('');
@@ -54,8 +54,8 @@ export default function HomeScreen() {
       setModalVisible(true);
       return
     }
-    setPlayer1(user1)
-    setPlayer2(user2)
+    setPlayer1Nickname(user1)
+    setPlayer2Nickname(user2)
     router.replace('Board')
   }
 
