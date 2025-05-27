@@ -1,13 +1,29 @@
 import { create } from "zustand";
 
 interface GameState {
-    gameStarted: boolean,
-    setGameStarted: (started: boolean) => void,
+    currentTurn: 'Player1' | 'Player2',
+    board: (null | string)[][],
+    updateBoard: (newBoard: (null | string)[][]) => void,
+    switchTurn: () => void,
     resetGame: () => void,
 }
 
 export const useGameStore = create<GameState>((set) => ({
-  gameStarted: false,
-  setGameStarted: (started) => set({ gameStarted: started }),
-  resetGame: () => set({ gameStarted: false }),
+    currentTurn: "Player1",
+    board: Array.from({ length: 6 }, () => Array(7).fill(null)),
+
+    updateBoard: (newBoard) =>
+        set({ board: newBoard }),
+
+    switchTurn: () => {
+        set((state) => ({
+            currentTurn: state.currentTurn === 'Player1' ? 'Player2' : 'Player1'
+        }));
+    },
+
+    resetGame: () =>
+        set((state) => ({
+            currentTurn: 'Player1',
+            board: Array.from({ length: 6 }, () => Array(7).fill(null))
+        }))
 }));
