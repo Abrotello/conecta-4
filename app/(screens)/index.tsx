@@ -28,7 +28,7 @@ export default function HomeScreen() {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [alertMessage, setAlertMessage] = useState<string>('')
 
-  const regex: RegExp = /[A-Za-z]{3}/;
+  const regex: RegExp = /[A-Za-z]{2,6}/;
 
   const checkUsers = () => {
     if(user1 === '' && user2 == '') {
@@ -56,7 +56,7 @@ export default function HomeScreen() {
     }
     setPlayer1Nickname(user1)
     setPlayer2Nickname(user2)
-    router.replace('Board')
+    router.replace('/(screens)/Board')
   }
 
   return (
