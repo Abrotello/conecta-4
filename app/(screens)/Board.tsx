@@ -10,7 +10,7 @@ import { usePlayerStore } from '@/global/playersStore';
 
 export default function BoardScreen() {
 
-  const { player1, player2 } = usePlayerStore()
+  const { player1, player2, resetWins } = usePlayerStore()
 
   return (
     <View style={styles.container}>
@@ -24,8 +24,8 @@ export default function BoardScreen() {
             <Text style={styles.playersText}>{player2.nickname}</Text>
           </View>
           <View style={styles.counterContainer}>
-            <Text style={styles.playersText}>{1}</Text>
-            <Text style={styles.playersText}>{2}</Text>
+            <Text style={styles.playersText}>{player1.wins}</Text>
+            <Text style={styles.playersText}>{player2.wins}</Text>
           </View>
         </View>
         <View style={styles.buttonsContainer}>
@@ -37,7 +37,7 @@ export default function BoardScreen() {
           </TouchableOpacity>
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: appColors.player1}]}
-            onPress={() => {}}
+            onPress={resetWins}
           >
             <Text style={styles.buttonText}>Reset wins</Text>
           </TouchableOpacity>
