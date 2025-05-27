@@ -3,7 +3,7 @@
 ¡Bienvenido a **Conecta 4**!
 Una versión digital del clásico juego de mesa, desarrollada con **React Native** y **Expo**.
 
-![Demo](./screenshots/demo.gif)
+![Demo](./screenshots/Demo.gif)
 
 ---
 
@@ -63,9 +63,11 @@ Una versión digital del clásico juego de mesa, desarrollada con **React Native
 ## 🧪 Capturas de pantalla
 
 ![Pantalla de inicio](./screenshots/Lobby.png)
+
 *Pantalla de inicio donde se ingresan los nombres de los jugadores.*
 
 ![Tablero de juego](./screenshots/Board.png)
+
 *Tablero de juego con fichas en juego.*
 
 ---
