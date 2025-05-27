@@ -7,10 +7,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { usePlayerStore } from '@/global/playersStore';
+import { useGameStore } from '@/global/gameStore';
 
 export default function BoardScreen() {
 
   const { player1, player2, resetWins } = usePlayerStore()
+  const { resetGame, currentTurn } = useGameStore();
 
   return (
     <View style={styles.container}>
@@ -20,18 +22,18 @@ export default function BoardScreen() {
         </View>
         <View style={styles.playersInfoContainer}>
           <View style={styles.playersContainer}>
-            <Text style={styles.playersText}>{player1.nickname}</Text>
-            <Text style={styles.playersText}>{player2.nickname}</Text>
+            <Text style={[styles.player1Text, {backgroundColor: currentTurn === 'Player1' ? appColors.opactiyPlayer1 : ""}]}>{player1.nickname}</Text>
+            <Text style={[styles.player2Text, {backgroundColor: currentTurn === 'Player2' ? appColors.opactiyPlayer2 : ""}]}>{player2.nickname}</Text>
           </View>
           <View style={styles.counterContainer}>
-            <Text style={styles.playersText}>{player1.wins}</Text>
-            <Text style={styles.playersText}>{player2.wins}</Text>
+            <Text style={styles.conterText}>{player1.wins}</Text>
+            <Text style={styles.conterText}>{player2.wins}</Text>
           </View>
         </View>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity 
             style={[styles.button, {backgroundColor: appColors.main}]}
-            onPress={() => {console.log('Restart game')}}
+            onPress={resetGame}
           >
             <Text style={styles.buttonText}>Restart game</Text>
           </TouchableOpacity>
@@ -105,15 +107,36 @@ const styles = StyleSheet.create({
     fontSize: 30,
     letterSpacing: 5
   },
-  playersText: {
+  player1Text: {
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 30,
+    padding: 5,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+    player2Text: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 30,
+    padding: 5,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+  conterText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 30,
+    padding: 5,
   },
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 18,
     alignSelf: 'center',
+  },
+  focus: {
+    backgroundColor: appColors.main,
+    padding: 5,
   }
 });
