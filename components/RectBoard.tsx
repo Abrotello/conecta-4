@@ -6,6 +6,10 @@ import {
   TouchableOpacity
 } from "react-native";
 import { useGameStore } from "@/global/gameStore";
+import { checkRows } from "@/utils/helpers";
+import { usePlayerStore } from "@/global/playersStore";
+import { useState } from "react";
+import CustomAlert from "./CustomAlert";
 const { width } = Dimensions.get('window')
 
 const rows = 6;
@@ -17,16 +21,37 @@ export default function RectBoard() {
     switchTurn,
     board,
     updateBoard,
-    currentTurn
+    currentTurn,
+    resetGame
   } = useGameStore.getState();
+
+  const { incrementPlayer1Wins, incrementPlayer2Wins, player1, player2 } = usePlayerStore.getState();
+  
+  const [alertMessage, setAlertMessage] = useState<string>('')
+  const [title, setTitle] = useState<string>('WINNER');
+  const [color, setColor] = useState<string>('#BC2C2C');
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   const handleTurns = (colIndex: number) => {
     for (let rowIndex = rows - 1; rowIndex >= 0; rowIndex--) {
       if (board[rowIndex][colIndex] === null) {
         const newBoard = [...board];
         const color = currentTurn === 'Player1' ? appColors.player1 : appColors.player2;
-        newBoard[rowIndex][colIndex] = color;
+        newBoard[rowIndex][colIndex] = { color, player: currentTurn };
         updateBoard(newBoard);
+        if(checkRows(currentTurn, rowIndex)) {
+          if (currentTurn === 'Player1') {
+            incrementPlayer1Wins();
+            setAlertMessage(`${player1.nickname} wins!`);
+            setModalVisible(true);
+          } else {
+            incrementPlayer2Wins();
+            setAlertMessage(`${player2.nickname} wins!`);
+            setModalVisible(true);
+          }
+          resetGame()
+          return
+        }
         switchTurn();
         break;
       }
@@ -47,13 +72,14 @@ export default function RectBoard() {
             return (
               <View key={rowIndex} style={styles.cell}>
                 <View style={styles.circle}>
-                  {chip && <View style={[styles.chip, {backgroundColor: chip}]}/>}
+                  {chip && <View style={[styles.chip, {backgroundColor: chip.color}]}/>}
                 </View>
               </View>
             )
           })}
         </TouchableOpacity>
       ))}
+      <CustomAlert message={alertMessage} visible={modalVisible} title="WINNER!" color="#6AA84F" onClose={() => setModalVisible(false)}/>
     </View>
   );
 }
