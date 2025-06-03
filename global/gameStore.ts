@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 interface GameState {
     currentTurn: 'Player1' | 'Player2',
-    board: (null | string)[][],
-    updateBoard: (newBoard: (null | string)[][]) => void,
+    board: (null | {color: string, player: 'Player1' | 'Player2'})[][],
+    updateBoard: (newBoard: (null | {color: string, player: 'Player1' | 'Player2'})[][]) => void,
     switchTurn: () => void,
     resetGame: () => void,
 }
