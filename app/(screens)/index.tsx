@@ -27,6 +27,8 @@ export default function HomeScreen() {
   const [ user2, setUser2 ] = useState<string>('');
   const [modalVisible, setModalVisible] = useState<boolean>(false)
   const [alertMessage, setAlertMessage] = useState<string>('')
+  const [title, setTitle] = useState<string>('ERROR');
+  const [color, setColor] = useState<string>('#BC2C2C');
 
   const regex: RegExp = /[A-Za-z]{2,6}/;
 
@@ -51,6 +53,8 @@ export default function HomeScreen() {
     }
     if(user1.toLowerCase() === user2.toLowerCase()) {
       setAlertMessage('Players are the same!');
+      setTitle('INFO');
+      setColor("#FFD966")
       setModalVisible(true);
       return
     }
@@ -97,7 +101,7 @@ export default function HomeScreen() {
           </View>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
-         <CustomAlert message={alertMessage} visible={modalVisible} onClose={() => setModalVisible(false)}/>
+         <CustomAlert message={alertMessage} visible={modalVisible} title={title} color={color} onClose={() => setModalVisible(false)}/>
     </SafeAreaView>
   );
 }
