@@ -12,12 +12,14 @@ import {
 interface AlertProps {
     visible: boolean,
     message: string,
+    title: string,
+    color: string,
     onClose: ()=> void,
 }
 
 const { width } = Dimensions.get('window')
 
-export default function Alert({ message, visible, onClose }: AlertProps) {
+export default function Alert({ message, visible, title, color = "#BC2C2C", onClose, }: AlertProps) {
 
     return (
         <Modal
@@ -28,8 +30,8 @@ export default function Alert({ message, visible, onClose }: AlertProps) {
         >
             <View style={styles.modalBackground}>
                 <View style={styles.modalContainer}>
-                    <View style={styles.modalTitleContainer}>
-                        <Text style={styles.modalTitle}>ERROR</Text>
+                    <View style={[styles.modalTitleContainer,  {backgroundColor: color}]}>
+                        <Text style={styles.modalTitle}>{title}</Text>
                     </View>
                     <View style={styles.modalButtonTextContainer}>
                         <Text style={styles.modalMessage}>{message}</Text>
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 5,
         marginBottom: 5,
-        backgroundColor: '#BC2C2C',
+        // backgroundColor: '#BC2C2C',
         borderBottomWidth: 1,
     },
     modalTitle: {
